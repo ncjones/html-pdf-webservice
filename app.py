@@ -30,7 +30,7 @@ def application(request):
     if request.files.get('html'):
         html_file = request.files['html']
     elif request.form.get('html'):
-        html_file = StringIO.StringIO(request.form.get('html'))
+        html_file = StringIO.StringIO(request.form.get('html').encode('utf-8'))
     else:
         return BadRequest('html is required')
     process = Popen(['wkhtmltopdf', '-q', '-', '-'], stdin=PIPE, stdout=PIPE)
